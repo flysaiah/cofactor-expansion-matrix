@@ -22,7 +22,6 @@ Matrix.prototype = {
 
 matrixCreate = function() {
 	var theMatrix = new Matrix(5, 5); //Create 5x5 matrix prototype
-	console.log(theMatrix)
 	for (var i=0; i<5; i++) { //Create empty 5x5 matrix
 		for (var j=0; j<5; j++) {
 			var entrybox = document.createElement('INPUT');
@@ -37,8 +36,15 @@ matrixCreate = function() {
 	}
 	var submitmatrixbutton = document.createElement('BUTTON'); //Create submit matrix button
 	submitmatrixbutton.innerHTML = "Find Determinant"
-	submitmatrixbutton.onclick = function() {
-		//code here for adding entries
+	submitmatrixbutton.onclick = function() { //Adds user input values to Matrix Object
+		for (i=0; i<5; i++) {
+			for (var j=0; j<5; j++) {
+				var entryID = String(i) + String(j);
+				var entry = document.getElementById(entryID).value;
+				theMatrix.addEntry(i, j, entry);
+			}
+		}
+		console.log(theMatrix);
 	}
 	var submitmatrixdiv = document.getElementById('submitmatrixdiv');
 	submitmatrixdiv.appendChild(submitmatrixbutton);
