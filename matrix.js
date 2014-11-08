@@ -19,7 +19,37 @@ Matrix.prototype = {
 	}
 }
 
-
+findDeterminant = function(someMatrix) { //Recursive function that computes determinant using a cofactor expansion along the first row of the matrix
+	console.log("function")
+	var theDeterminant;
+	if (someMatrix.get_num_columns() == 2) { //Base case; no more recursivity
+		theDeterminant = someMatrix.entries[0][0] * someMatrix.entries[1][1] - someMatrix.entries[1][0] * someMatrix.entries[0][1]; //ad-bc
+		console.log(theDeterminant);
+	}
+	else {
+		var firstrow = someMatrix[0];
+		var arrayofmatrices = []; //Holds Matrix objects to be used in the recursive call
+		var cur_row = 0;
+		for (var cur_col=0; cur_col<someMatrix.get_num_columns(); cur_col++) {
+			var newMatrix = new Matrix(someMatrix.get_num_rows()-1, someMatrix.get_num_columns()-1)
+			var _i = 0;
+			for (var i=0; i<someMatrix.get_num_columns(); i++) {
+				var _j = 0;
+				if (i != cur_col) {
+					for (var j=0; j<someMatrix.get_num_rows(); j++) {
+						if (j != cur_row) {
+							newMatrix.addEntry(_i, _j, someMatrix.entries[i][j]);
+							_j++;
+						}
+					}
+					_i++;
+				}
+			}
+			arrayofmatrices.push(newMatrix);
+		}
+		console.log(arrayofmatrices);
+	}
+}
 matrixCreate = function() {
 	var theMatrix = new Matrix(5, 5); //Create 5x5 matrix prototype
 	for (var i=0; i<5; i++) { //Create empty 5x5 matrix
@@ -45,8 +75,10 @@ matrixCreate = function() {
 			}
 		}
 		console.log(theMatrix);
+
+		findDeterminant(theMatrix);
 	}
-	var submitmatrixdiv = document.getElementById('submitmatrixdiv');
+	var submitmatrixdiv = document.getElementById('submitmatrixdiv'); //Pushes button to page
 	submitmatrixdiv.appendChild(submitmatrixbutton);
 
 }
