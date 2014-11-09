@@ -60,6 +60,7 @@ matrixCreate = function() {
 		for (var j=0; j<4; j++) {
 			var entrybox = document.createElement('INPUT');
 			entrybox.type = "text";
+			entrybox.className = "matrixinput"
 			entrybox.id = String(i) + String(j);
 			entrybox.value = 0;
 			var matrixdiv = document.getElementById('matrixdiv');
@@ -79,7 +80,14 @@ matrixCreate = function() {
 			}
 		}
 
-		console.log(findDeterminant(theMatrix));
+		var det_A = findDeterminant(theMatrix);  //Push answer to screen
+		var det_container = document.createElement('P');
+		det_container.innerHTML = String(det_A);
+		var det_div = document.getElementById('det_div');
+		det_div.innerHTML = "";
+		det_div.appendChild(det_container);
+
+
 	}
 	var submitmatrixdiv = document.getElementById('submitmatrixdiv'); //Pushes button to page
 	submitmatrixdiv.appendChild(submitmatrixbutton);
