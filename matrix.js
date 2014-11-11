@@ -16,16 +16,22 @@ Matrix.prototype = {
 	},
 	addEntry: function(row, column, entry_value) {
 		this.entries[row][column] = entry_value;
+	},
+	getEntry: function(row, column) {
+		return this.entries[row][column];
+	},
+	getRow: function(row) {
+		return this.entries[row];
 	}
 }
 
 findDeterminant = function(someMatrix) { //Recursive function that computes determinant using a cofactor expansion along the first row of the matrix
 	if (someMatrix.get_num_columns() == 2) { //Base case; no more recursivity
-		var theDeterminant = someMatrix.entries[0][0] * someMatrix.entries[1][1] - someMatrix.entries[1][0] * someMatrix.entries[0][1]; //ad-bc
+		var theDeterminant = someMatrix.getEntry(0,0) * someMatrix.getEntry(1,1) - someMatrix.getEntry(1,0) * someMatrix.getEntry(0,1); //ad-bc
 		return theDeterminant
 	}
 	else {
-		var firstrow = someMatrix.entries[0];
+		var firstrow = someMatrix.getRow(0);
 		var arrayofmatrices = []; //Holds Matrix objects to be used in the recursive call
 		var cur_row = 0;
 		for (var cur_col=0; cur_col<someMatrix.get_num_columns(); cur_col++) {
@@ -36,7 +42,7 @@ findDeterminant = function(someMatrix) { //Recursive function that computes dete
 				if (i != cur_row) {
 					for (var j=0; j<someMatrix.get_num_columns(); j++) {
 						if (j != cur_col) {
-							newMatrix.addEntry(_i, _j, someMatrix.entries[i][j]);
+							newMatrix.addEntry(_i, _j, someMatrix.getEntry(i, j);
 							_j++;
 						}
 					}
