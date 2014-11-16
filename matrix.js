@@ -42,7 +42,7 @@ findDeterminant = function(someMatrix) { //Recursive function that computes dete
 				if (i != cur_row) {
 					for (var j=0; j<someMatrix.get_num_columns(); j++) {
 						if (j != cur_col) {
-							newMatrix.addEntry(_i, _j, someMatrix.getEntry(i, j);
+							newMatrix.addEntry(_i, _j, someMatrix.getEntry(i, j));
 							_j++;
 						}
 					}
