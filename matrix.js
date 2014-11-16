@@ -22,6 +22,10 @@ Matrix.prototype = {
 	},
 	getRow: function(row) {
 		return this.entries[row];
+	},
+	toString: function() {
+		return String(this.entries);
+		
 	}
 }
 
@@ -54,13 +58,15 @@ findDeterminant = function(someMatrix) { //Recursive function that computes dete
 		var theDeterminant = 0;
 		var sign = 1;
 		for (var i=0; i<firstrow.length; i++) {
-			theDeterminant = theDeterminant + sign*firstrow[i]*findDeterminant(arrayofmatrices[i]);
+			theDeterminant = theDeterminant + sign*firstrow[i]*findDeterminant(arrayofmatrices[i]); //Recursive
 			sign *= -1;
 		}
 		return theDeterminant
 	}
 }
 matrixCreate = function() {
+	var matrixdiv = document.getElementById('matrixdiv');
+	matrixdiv.innerHTML = "";
 	var theMatrix = new Matrix(4, 4); //Create 5x5 matrix prototype
 	for (var i=0; i<4; i++) { //Create empty 5x5 matrix
 		for (var j=0; j<4; j++) {
@@ -69,7 +75,6 @@ matrixCreate = function() {
 			entrybox.className = "matrixinput"
 			entrybox.id = String(i) + String(j);
 			entrybox.value = 0;
-			var matrixdiv = document.getElementById('matrixdiv');
 			matrixdiv.appendChild(entrybox);
 		}
 		var newline = document.createElement('BR')
@@ -77,7 +82,7 @@ matrixCreate = function() {
 	}
 	var submitmatrixbutton = document.createElement('BUTTON'); //Create submit matrix button
 	submitmatrixbutton.innerHTML = "Find Determinant"
-	submitmatrixbutton.onclick = function() { //Adds user input values to Matrix Object
+	submitmatrixbutton.onclick = function() { //Adds user input values to Matrix Object nad finds the determinant
 		for (i=0; i<4; i++) {
 			for (var j=0; j<4; j++) {
 				var entryID = String(i) + String(j);
@@ -94,8 +99,22 @@ matrixCreate = function() {
 		det_div.appendChild(det_container);
 
 
+		var showhowbutton = document.createElement('BUTTON'); //Create button to show how matrix was solved
+		showhowbutton.innerHTML = "Show How";
+		showhowbutton.onclick = function() {
+			//code here
+		}
+		var showhowdiv = document.getElementById('showhowdiv');
+		showhowdiv.innerHTML = "";
+		showhowdiv.appendChild(showhowbutton);
 	}
+
 	var submitmatrixdiv = document.getElementById('submitmatrixdiv'); //Pushes button to page
+	submitmatrixdiv.innerHTML = "";
 	submitmatrixdiv.appendChild(submitmatrixbutton);
 
 }
+
+
+
+//Thinking of adding an option to findDeterminant function for returning the arrayofmatrices--that array is the key to printing out the steps of the function.
