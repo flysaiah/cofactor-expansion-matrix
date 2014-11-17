@@ -65,11 +65,13 @@ findDeterminant = function(someMatrix) { //Recursive function that computes dete
 	}
 }
 matrixCreate = function() {
-	var matrixdiv = document.getElementById('matrixdiv');
-	matrixdiv.innerHTML = "";
-	var theMatrix = new Matrix(4, 4); //Create 5x5 matrix prototype
-	for (var i=0; i<4; i++) { //Create empty 5x5 matrix
-		for (var j=0; j<4; j++) {
+
+	var n = document.getElementById('ninput').value;
+
+	$(".cleardiv").html("");
+	var theMatrix = new Matrix(n, n); //Create nxn matrix prototype
+	for (var i=0; i<n; i++) { //Create empty nxn matrix
+		for (var j=0; j<n; j++) {
 			var entrybox = document.createElement('INPUT');
 			entrybox.type = "text";
 			entrybox.className = "matrixinput"
@@ -83,8 +85,8 @@ matrixCreate = function() {
 	var submitmatrixbutton = document.createElement('BUTTON'); //Create submit matrix button
 	submitmatrixbutton.innerHTML = "Find Determinant"
 	submitmatrixbutton.onclick = function() { //Adds user input values to Matrix Object nad finds the determinant
-		for (i=0; i<4; i++) {
-			for (var j=0; j<4; j++) {
+		for (i=0; i<n; i++) {
+			for (var j=0; j<n; j++) {
 				var entryID = String(i) + String(j);
 				var entry = document.getElementById(entryID).value;
 				theMatrix.addEntry(i, j, entry);
